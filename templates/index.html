@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Firebase Login</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+</head>
+
+<body>
+
+<h2>Login/Register</h2>
+
+<input type="email" id="email" placeholder="Enter Email"><br><br>
+<input type="password" id="password" placeholder="Enter Password"><br><br>
+
+<button onclick="register()">Register</button>
+<button onclick="login()">Login</button>
+
+<p id="msg"></p>
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAeFmkleURLXhobL_MSd-1WRvrF7KccSvc",
+  authDomain: "fir-gae-practical.firebaseapp.com",
+  projectId: "fir-gae-practical",
+  storageBucket: "fir-gae-practical.firebasestorage.app",
+  messagingSenderId: "206397006640",
+  appId: "1:206397006640:web:10d78bdda02984058a1ef5",
+  measurementId: "G-RE6KT3M15Q"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+function register(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  auth.createUserWithEmailAndPassword(email, pass)
+  .then(() => document.getElementById("msg").innerHTML="Registered")
+  .catch(err => document.getElementById("msg").innerHTML=err.message);
+}
+
+function login(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, pass)
+  .then(() => document.getElementById("msg").innerHTML="Login Success")
+  .catch(err => document.getElementById("msg").innerHTML=err.message);
+}
+
+</script>
+
+</body>
+</html>
